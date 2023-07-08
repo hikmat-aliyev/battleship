@@ -1,6 +1,7 @@
 function Ship(length) {
     let hits = 0;
     let isShipSunk = false;
+    let length = length;
 
     function hit() {
         hits++;
@@ -16,7 +17,8 @@ function Ship(length) {
 
     return {
         hit: hit,
-        isSunk: isSunk
+        isSunk: isSunk,
+        length: length
     };
 }
 
