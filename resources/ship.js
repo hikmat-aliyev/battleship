@@ -1,13 +1,13 @@
-function Ship(length) {
+export default function Ship(length) {
     let hits = 0;
     let isShipSunk = false;
-    let length = length;
 
     function hit() {
         hits++;
-        if(hits >= length){
+        if (hits >= length) {
             isShipSunk = true;
         }
+        console.log(isShipSunk)
         return hits;
     }
 
@@ -18,8 +18,6 @@ function Ship(length) {
     return {
         hit: hit,
         isSunk: isSunk,
-        length: length
+        length: length,
     };
 }
-
-module.exports = Ship;

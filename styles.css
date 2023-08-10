@@ -1,0 +1,58 @@
+#humanBoard > div, #computerBoard > div {
+    border: 1px rgba(0, 187, 255, 0.412) solid;
+    width: 48px;
+    height: 48px;
+}
+
+#humanBoard, #computerBoard {
+    border: 1px black solid;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#boardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.human-square, .computer-square {
+    background-color: rgb(1, 145, 255)
+}
+
+
+
+.mouseover-ship {
+    background-color: #9b9b9b99;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.ship {
+    background-color: blue; /* You can change this to any color you want */
+}
+
+/*
+.computer-ship {
+    background-color: antiquewhite;
+}*/
+
+.ship-attacked {
+    background-color: red;
+}
+
+.null-attacked {
+    background-color: green;
+    color: red; 
+    font-size: 48px;
+    content: "\00B7";
+}
+
+.attack-cursor {
+    cursor: url('./resources/images/swords.png'), auto;
+  }
+
+
+
+  

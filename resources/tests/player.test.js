@@ -14,6 +14,4 @@ it("computer attacks properly", () => {
     const human = Player('human');
     human.humanAttack(computerGameboard, 1, 2);
     expect(human.humanAttack(computerGameboard, 1, 2)).toBe(false);
-    
-
 })
