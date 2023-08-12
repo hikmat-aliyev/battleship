@@ -126,7 +126,8 @@ export default function Gameboard(name) {
         ships.forEach(ship => {
             if(ship.isSunk()) sunkShips ++;
         }); 
-        if((sunkShips === ships.length) && ships.length === 4) {
+        //CHANGE ship.length to === 4
+        if((sunkShips === ships.length) && ships.length === 1) {
             return true;
         }
         else return false;
@@ -135,7 +136,8 @@ export default function Gameboard(name) {
     function placeComputerShips() {
         const shipSizes = [5, 4, 3, 2];
         let successfulPlacements = 0;
-        while(successfulPlacements < 4){
+        //change  < 4
+        while(successfulPlacements < 1){
             const row = Math.floor(Math.random() * 9)
             const column = Math.floor(Math.random() * 9)
             const isVertical = Math.floor(Math.random() * 2) === 1 ? true : false
