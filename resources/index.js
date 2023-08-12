@@ -5,13 +5,13 @@ let lengthOfShip = 5;
 
 function game() {
     
-    const humanBoard = Gameboard('human');
-    const human = Player('humanPlayer');
-    const computer = Player('computerPlayer');
+    let humanBoard = Gameboard('human');
+    let human = Player('humanPlayer');
+    let computer = Player('computerPlayer');
     const humanDivContainer = document.getElementById("humanBoard");
     renderBoards(humanBoard, humanDivContainer);
 
-    const computerBoard = Gameboard('computer');
+    let computerBoard = Gameboard('computer');
     const computerDivContainer = document.getElementById("computerBoard");
     renderBoards(computerBoard, computerDivContainer);
 
@@ -55,14 +55,14 @@ function game() {
         verticalButton.textContent = isVertical ? "Vertical" : "Horizontal";
     })
 
-    // humanSquares.forEach(square => {
-    //     square.addEventListener("mouseover", () => {
-    //         showShadowsOfShip(square, humanSquares, isVertical);
-    //     });
-    //     square.addEventListener("click", () => {
-    //         settleShipsOnBoard(humanBoard, isVertical, square, humanSquares);   
-    //     })
-    // });
+    humanSquares.forEach(square => {
+        square.addEventListener("mouseover", () => {
+            showShadowsOfShip(square, humanSquares, isVertical);
+        });
+        square.addEventListener("click", () => {
+            settleShipsOnBoard(humanBoard, isVertical, square, humanSquares);   
+        })
+    });
 
     humanDivContainer.addEventListener("mouseleave", () => {
         humanSquares.forEach(square => {
@@ -73,39 +73,13 @@ function game() {
     });
 
 
-
-    // Define event handler functions
-    function handleMouseover(square) {
-        showShadowsOfShip(square, humanSquares, isVertical);
-    }
-    
-    function handleClick(square) {
-        settleShipsOnBoard(humanBoard, isVertical, square, humanSquares);
-    }
-    
-    // Adding event listener to the container
-    humanDivContainer.addEventListener("mouseover", function(event) {
-        const target = event.target;
-        if (target.classList.contains("human-square")) {
-            handleMouseover(target);
-        }
-    });
-    
-    humanDivContainer.addEventListener("click", function(event) {
-        const target = event.target;
-        if (target.classList.contains("human-square")) {
-            handleClick(target);
-        }
-    });
-
-
-    // DOESN'T WORK!!!
     const startAgainButton = document.querySelector(".start-again-button")
     startAgainButton.addEventListener("click", () => {
         while(humanDivContainer.firstChild){
             humanDivContainer.removeChild(humanDivContainer.firstChild);
             computerDivContainer.removeChild(computerDivContainer.firstChild);
         }
+        lengthOfShip = 5;
         modal.classList.remove("visible");
         backdrop.classList.remove("visible"); 
         game();
