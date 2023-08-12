@@ -1,15 +1,13 @@
-import { set } from "lodash";
 import Gameboard from "./gameboard";
 import Player from "./player";
 
 let lengthOfShip = 5;
-let lengthOfComputerShip = 4;
 
 function game() {
     
     const humanBoard = Gameboard('human');
     const human = Player('humanPlayer');
-    const computer = Player('computerPlayer')
+    const computer = Player('computerPlayer');
     const humanDivContainer = document.getElementById("humanBoard");
     renderBoards(humanBoard, humanDivContainer);
 
@@ -20,14 +18,12 @@ function game() {
     computerDivContainer.addEventListener('mouseover', () => {
         computerDivContainer.classList.add('attack-cursor');
     });
-    console.log(computerDivContainer)
-    // computerDivContainer.addEventListener('mouseleave', () => {
-    //     computerDivContainer.classList.remove('attack-cursor');
-    // });
 
     const humanSquares = document.querySelectorAll(".human-square");
     const computerSquares = document.querySelectorAll(".computer-square");
 
+    const modal = document.querySelector(".game-over-modal");
+    const backdrop = document.querySelector(".backdrop");
     //game loop
     computerSquares.forEach(square => {
         square.addEventListener("click", () => {
@@ -39,12 +35,15 @@ function game() {
                 computer.computerAttack(humanBoard, humanSquares);
                 if(square.classList.contains("computer-ship")) {
                     square.classList.add("ship-attacked");
+                    square.innerHTML = "&#183"
                 }
                 else {
                     square.classList.add("null-attacked");
-                    square.textContent = ".";
                 }
-                if(computerBoard.isAllShipsSunk() || humanBoard.isAllShipsSunk()) console.log("game over")
+                if(computerBoard.isAllShipsSunk() || humanBoard.isAllShipsSunk()){
+                    modal.classList.add("visible");
+                    backdrop.classList.add("visible");
+                } 
             }
         })
     })  
@@ -56,14 +55,14 @@ function game() {
         verticalButton.textContent = isVertical ? "Vertical" : "Horizontal";
     })
 
-    humanSquares.forEach(square => {
-        square.addEventListener("mouseover", () => {
-            showShadowsOfShip(square, humanSquares, isVertical);
-        });
-        square.addEventListener("click", () => {
-            settleShipsOnBoard(humanBoard, isVertical, square, humanSquares);   
-        })
-    });
+    // humanSquares.forEach(square => {
+    //     square.addEventListener("mouseover", () => {
+    //         showShadowsOfShip(square, humanSquares, isVertical);
+    //     });
+    //     square.addEventListener("click", () => {
+    //         settleShipsOnBoard(humanBoard, isVertical, square, humanSquares);   
+    //     })
+    // });
 
     humanDivContainer.addEventListener("mouseleave", () => {
         humanSquares.forEach(square => {
@@ -73,7 +72,47 @@ function game() {
         });
     });
 
+
+
+    // Define event handler functions
+    function handleMouseover(square) {
+        showShadowsOfShip(square, humanSquares, isVertical);
+    }
+    
+    function handleClick(square) {
+        settleShipsOnBoard(humanBoard, isVertical, square, humanSquares);
+    }
+    
+    // Adding event listener to the container
+    humanDivContainer.addEventListener("mouseover", function(event) {
+        const target = event.target;
+        if (target.classList.contains("human-square")) {
+            handleMouseover(target);
+        }
+    });
+    
+    humanDivContainer.addEventListener("click", function(event) {
+        const target = event.target;
+        if (target.classList.contains("human-square")) {
+            handleClick(target);
+        }
+    });
+
+
+    // DOESN'T WORK!!!
+    const startAgainButton = document.querySelector(".start-again-button")
+    startAgainButton.addEventListener("click", () => {
+        while(humanDivContainer.firstChild){
+            humanDivContainer.removeChild(humanDivContainer.firstChild);
+            computerDivContainer.removeChild(computerDivContainer.firstChild);
+        }
+        modal.classList.remove("visible");
+        backdrop.classList.remove("visible"); 
+        game();
+    })
+
 }
+
 
 function renderBoards(gameBoard, divContainer) {
 
@@ -125,6 +164,7 @@ function settleShipsOnBoard(board, isVertical, square, squares) {
         }
     }
 }
+
 
 
 game();

@@ -14,10 +14,11 @@ export default function Player(name) {
             const row = square.row;
             const column = square.column;
             if(randomRow == row && randomColumn == column) {
-                if(square.classList.contains("ship")) square.classList.add("ship-attacked");
-                else {
+                if(square.classList.contains("ship")) {
+                    square.classList.add("ship-attacked");
+                    square.innerHTML = "&#183";
+                }else {
                     square.classList.add("null-attacked");
-                    //square.textContent = ".";
                 }
             }
         })

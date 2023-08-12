@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="styles.css">
     <script src="dist/bundle.js" defer></script>
 </head>
-<body id="body">
+<body class="body">
+    <div class="backdrop"></div>
     <button id="isVertical">Vertical</button>
     <div id="boardContainer">
         <div id="humanBoard"></div>
         <div id="computerBoard"></div>
     </div>
+
+    <div class="game-over-modal"> 
+        <p>GAME OVER</p>
+        <button class="start-again-button">Start again</button>
+    </div>
+
 </body>
 </html>

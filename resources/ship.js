@@ -7,7 +7,6 @@ export default function Ship(length) {
         if (hits >= length) {
             isShipSunk = true;
         }
-        console.log(isShipSunk)
         return hits;
     }
 
